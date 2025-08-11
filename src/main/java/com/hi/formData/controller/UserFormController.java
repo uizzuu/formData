@@ -1,6 +1,8 @@
 package com.hi.formData.controller;
 
+import com.hi.formData.dto.Day;
 import com.hi.formData.dto.FormDto;
+import com.hi.formData.dto.Langauge;
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +24,18 @@ public class UserFormController {
 
     @PostMapping("/form")
     public String form(@ModelAttribute("dto") FormDto dto, Model model) {
+        for (String x : dto.getHobbies()) {
+            System.out.println(x);
+        }
+        dto.setDay(Day.MON);
         model.addAttribute("dto", dto);
         return "/result";
+    }
+
+    // Enum Type 데이터를 @ModelAttribute로 보내기
+    @ModelAttribute("language")
+    private Langauge[] langauges() {
+        return Langauge.values();
     }
 
     // 메서드에 정의도니 @ModelAttribute는

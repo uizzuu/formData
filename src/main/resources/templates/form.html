@@ -31,8 +31,19 @@
             <div>취미 선택 (다중 선택 가능)</div>
             <!-- 반복문을 돌면서 취미를 출력하기 -->
             <div th:each="hobby : ${hobbies}" class="form-check">
-                <input type="checkbox" th:field="*{hobbies}" th:value="${hobby.key}" class="form-check-input">
-                <label for="hobbies" th:text="${hobby.value}" class="form-check-label"></label>
+                <input type="checkbox" th:field="*{hobbies}"
+                       th:value="${hobby.key}" class="form-check-input">
+                <label th:for="${#ids.prev('hobbies')}" th:text="${hobby.value}" class="form-check-label"></label>
+            </div>
+        </div>
+        <br><hr><br>
+        <!-- 좋아하는 과목 선택 (한가지만) -->
+        <div>
+            <div>좋아하는 프로그래밍 언어 (한 개만 선택)</div>
+            <div th:each="lang : ${language}" class="form-check">
+                <input type="radio" th:field="*{language}"
+                       th:value="${lang.name()}" class="form-check-input">
+                <label th:for="${#ids.prev('language')}" th:text="${lang.description}" class="form-check-label"></label>
             </div>
         </div>
         <br><hr><br>
